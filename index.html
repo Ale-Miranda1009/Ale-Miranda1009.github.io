@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!-- ============================================================
+     PORTAFOLIO — página principal
+     <!DOCTYPE html> = le avisa al navegador "esto es HTML moderno".
+     lang="es"       = el contenido está en español.
+     ============================================================ -->
+<html lang="es">
+<head>
+  <!-- charset = qué alfabeto usamos. utf-8 permite tildes y ñ. -->
+  <meta charset="utf-8">
+  <!-- viewport = hace que la página se adapte al ancho del móvil. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- description = el textito que sale en Google debajo del título. -->
+  <meta name="description" content="Portafolio de desarrollo backend con Java y Spring Boot.">
+
+  <!-- title = el nombre que sale en la pestaña del navegador. -->
+  <title>Portafolio · Karen Miranda</title>
+
+  <!-- link rel="stylesheet" = "trae los estilos que están en styles.css". -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ========== BARRA DE NAVEGACIÓN ==========
+       <nav> = zona de enlaces de navegación.
+       Cada href="#algo" salta a la sección con ese id más abajo. -->
+  <nav class="nav">
+    <a class="nav__logo" href="#inicio">&lt;/&gt; Karen Miranda</a>
+    <ul class="nav__links">
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="curriculum.pdf" download>Currículum</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== PORTADA (hero) ==========
+       "hero" es como se le llama al bloque grande de bienvenida. -->
+  <header class="hero" id="inicio">
+    <p class="hero__saludo">Hola, soy</p>
+    <h1 class="hero__nombre">Karen Miranda</h1>
+    <p class="hero__rol">Desarrolladora Backend Junior · Java &amp; Spring Boot</p>
+    <p class="hero__texto">
+      Estudiante de Ingeniería de Sistemas construyendo APIs REST con Java 17,
+      Spring Boot y PostgreSQL. Me interesa entender <em>por qué</em> funciona
+      cada cosa, no solo que funcione.
+    </p>
+    <div class="hero__botones">
+      <a class="boton boton--primario" href="#proyectos">Ver proyectos</a>
+      <a class="boton boton--secundario" href="https://github.com/Ale-Miranda1009" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== PROYECTOS ========== -->
+    <section class="seccion" id="proyectos">
+      <h2 class="seccion__titulo">Proyectos</h2>
+      <p class="seccion__intro">
+        Cada proyecto incluye el código en GitHub y una explicación de qué
+        decisiones técnicas tomé.
+      </p>
+
+      <!-- ---- PROYECTO DESTACADO ----
+           Este ocupa el ancho completo porque es el más fuerte. -->
+      <article class="proyecto proyecto--destacado">
+        <div class="proyecto__etiqueta">Proyecto destacado</div>
+        <h3 class="proyecto__titulo">BankConnect · accounts-service</h3>
+        <p class="proyecto__desc">
+          Microservicio bancario con clientes, cuentas y movimientos de dinero:
+          ingresos, retiros y transferencias. 12 endpoints REST sobre PostgreSQL,
+          con su propia interfaz web y 32 tests. Lo hice para entender cómo se
+          construye un backend de verdad, no solo un CRUD.
+        </p>
+        <ul class="proyecto__puntos">
+          <li><strong>El dinero se maneja con <code>BigDecimal</code></strong>, nunca con <code>double</code>. En Java <code>0.1 + 0.2</code> da <code>0.30000000000000004</code>, y en un saldo bancario eso no vale.</li>
+          <li><strong>Las transferencias son atómicas.</strong> Restar, sumar y registrar el movimiento pasan dentro de una transacción: o se hacen las tres cosas o no se hace ninguna.</li>
+          <li><strong>Las cuentas se bloquean antes de tocar el saldo</strong>, y siempre en el mismo orden. Si no, dos transferencias cruzadas se quedan esperándose la una a la otra para siempre.</li>
+          <li><strong>Ninguna cuenta se borra.</strong> Cambian de estado y sus movimientos se conservan, porque un banco no puede perder el histórico.</li>
+          <li><strong>Los errores se traducen en un solo sitio</strong> al código HTTP que les toca, y ningún controlador tiene <code>try/catch</code>.</li>
+          <li>Arquitectura en <strong>capas</strong>: Controller → Service → Repository → Base de datos, y las entidades nunca salen al exterior.</li>
+        </ul>
+        <ul class="proyecto__tags">
+          <li>Java 17</li><li>Spring Boot</li><li>Spring Data JPA</li>
+          <li>PostgreSQL</li><li>Flyway</li><li>Maven</li>
+          <li>JUnit 5</li><li>Mockito</li><li>Swagger</li>
+        </ul>
+        <div class="proyecto__enlaces">
+          <a href="https://github.com/Ale-Miranda1009/accounts-service" class="boton boton--primario" target="_blank" rel="noopener">Ver en GitHub →</a>
+        </div>
+      </article>
+
+      <!-- ---- REJILLA DE PROYECTOS ----
+           <div class="grid"> coloca las tarjetas en columnas automáticas. -->
+      <div class="grid">
+
+        <article class="proyecto">
+          <h3 class="proyecto__titulo">Chatbot de atención comercial</h3>
+          <p class="proyecto__desc">
+            Chatbot web para una empresa de servicios: responde preguntas usando una
+            base de conocimiento propia y registra los datos de contacto de los
+            interesados (leads) en base de datos.
+          </p>
+          <ul class="proyecto__tags">
+            <li>Python</li><li>FastAPI</li><li>SQLite</li>
+            <li>API de IA</li><li>HTML/CSS/JS</li>
+          </ul>
+          <div class="proyecto__enlaces">
+            <a href="https://github.com/Ale-Miranda1009/seyspro-chatbot" class="boton boton--primario" target="_blank" rel="noopener">Ver en GitHub →</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== SOBRE MÍ ========== -->
+    <section class="seccion" id="sobre-mi">
+      <h2 class="seccion__titulo">Sobre mí</h2>
+      <div class="sobre">
+        <p>
+          Soy estudiante de Ingeniería de Sistemas (7° semestre) y me estoy formando
+          como desarrolladora backend con Java. Aprendo construyendo: cada concepto que
+          estudio lo aplico en un proyecto real antes de darlo por sabido.
+        </p>
+        <p>
+          Uso herramientas de IA como apoyo para aprender más rápido, siempre
+          entendiendo y verificando lo que producen. Leo documentación técnica en
+          inglés sin dificultad y busco mi primera experiencia profesional en un
+          equipo donde pueda crecer.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========== HABILIDADES ========== -->
+    <section class="seccion" id="habilidades">
+      <h2 class="seccion__titulo">Habilidades</h2>
+      <div class="grid">
+        <div class="habilidad">
+          <h3>Backend</h3>
+          <ul>
+            <li>Java 17 · Programación Orientada a Objetos</li>
+            <li>Spring Boot · Spring Data JPA</li>
+            <li>APIs REST · JSON</li>
+            <li>Arquitectura en capas</li>
+          </ul>
+        </div>
+        <div class="habilidad">
+          <h3>Datos</h3>
+          <ul>
+            <li>SQL · bases de datos relacionales</li>
+            <li>PostgreSQL</li>
+            <li>Modelado de tablas y relaciones</li>
+            <li>Migraciones con Flyway</li>
+          </ul>
+        </div>
+        <div class="habilidad">
+          <h3>Herramientas</h3>
+          <ul>
+            <li>Git y GitHub</li>
+            <li>Maven</li>
+            <li>IntelliJ IDEA</li>
+            <li>Python · FastAPI</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACTO ========== -->
+    <section class="seccion seccion--contacto" id="contacto">
+      <h2 class="seccion__titulo">Contacto</h2>
+      <p class="seccion__intro">
+        Estoy buscando mi primera oportunidad como desarrolladora backend.
+      </p>
+      <div class="hero__botones">
+        <a class="boton boton--secundario" href="https://github.com/Ale-Miranda1009" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <p>Hecho a mano con HTML y CSS.</p>
+  </footer>
+
+</body>
+</html>
