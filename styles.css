@@ -1,0 +1,350 @@
+/* ============================================================
+   ESTILOS DEL PORTAFOLIO
+   Un archivo CSS dice CÓMO SE VE cada cosa del HTML.
+   Se lee así:   selector { propiedad: valor; }
+   ============================================================ */
+
+/* ---------- 1. VARIABLES DE COLOR ----------
+   :root = "la raíz del documento". Aquí guardamos los colores con un
+   nombre (--fondo, --texto...) para reutilizarlos en todo el archivo.
+   Si mañana quieres cambiar el color de acento, lo cambias UNA vez aquí. */
+:root {
+  --fondo:        #0e1116;   /* fondo general, casi negro azulado */
+  --superficie:   #161b22;   /* fondo de las tarjetas */
+  --borde:        #262d38;
+  --texto:        #e6edf3;   /* texto principal, blanco suave */
+  --texto-suave:  #9aa7b4;   /* texto secundario, gris */
+  --acento:       #58a6ff;   /* azul: enlaces y detalles */
+  --acento-fuerte:#1f6feb;
+
+  --radio:        14px;      /* cuánto se redondean las esquinas */
+  --ancho-max:    1080px;    /* ancho máximo del contenido */
+}
+
+/* ---------- 2. RESET Y BASE ----------
+   El * significa "todos los elementos".
+   box-sizing: border-box hace que el ancho incluya el padding:
+   sin esto, las cajas se salen de sitio y vuelven loco a cualquiera. */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* font-family: lista de fuentes. El navegador usa la primera que tenga. */
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--fondo);       /* var(--x) = "usa la variable --x" */
+  color: var(--texto);
+  line-height: 1.65;                    /* separación entre renglones */
+  -webkit-font-smoothing: antialiased;  /* texto un poco más nítido */
+}
+
+/* Los enlaces, sin subrayado por defecto y en color de acento. */
+a {
+  color: var(--acento);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }  /* :hover = al pasar el ratón encima */
+
+/* Que ninguna imagen se salga de su caja. */
+img { max-width: 100%; display: block; }
+
+/* Al hacer clic en un enlace #seccion, que baje suave en vez de saltar. */
+html { scroll-behavior: smooth; }
+
+/* ---------- 3. BARRA DE NAVEGACIÓN ---------- */
+.nav {
+  position: sticky;   /* sticky = se queda pegada arriba al hacer scroll */
+  top: 0;
+  z-index: 10;        /* z-index alto = se dibuja por encima de lo demás */
+
+  display: flex;                    /* flex = pone los hijos en fila */
+  justify-content: space-between;   /* uno a la izquierda, otro a la derecha */
+  align-items: center;              /* centrados verticalmente */
+  gap: 1rem;
+  flex-wrap: wrap;                  /* si no caben, bajan de línea */
+
+  padding: 1rem 1.5rem;
+  background-color: rgba(14, 17, 22, 0.85);
+  backdrop-filter: blur(8px);       /* desenfoca lo que pasa por detrás */
+  border-bottom: 1px solid var(--borde);
+}
+
+.nav__logo {
+  font-weight: 700;
+  color: var(--texto);
+  letter-spacing: 0.5px;
+}
+
+.nav__links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;   /* quita los puntitos de la lista */
+}
+
+.nav__links a {
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+.nav__links a:hover { color: var(--texto); }
+
+/* ---------- 4. PORTADA (hero) ---------- */
+.hero {
+  max-width: var(--ancho-max);
+  margin: 0 auto;            /* auto a los lados = centrado horizontal */
+  padding: 6rem 1.5rem 4rem;
+  text-align: center;
+}
+
+.hero__saludo {
+  color: var(--acento);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.hero__nombre {
+  /* clamp(mínimo, ideal, máximo): el tamaño se adapta a la pantalla solo.
+     5vw = 5% del ancho de la ventana. */
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 0.75rem;
+}
+
+.hero__rol {
+  font-size: clamp(1.05rem, 2.5vw, 1.4rem);
+  color: var(--texto-suave);
+  margin-bottom: 1.5rem;
+}
+
+.hero__texto {
+  max-width: 620px;
+  margin: 0 auto 2.5rem;
+  color: var(--texto-suave);
+}
+
+.hero__botones {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ---------- 5. BOTONES ---------- */
+.boton {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radio);
+  font-weight: 600;
+  font-size: 0.95rem;
+  /* transition = anima el cambio en 0.2 segundos en vez de golpe seco. */
+  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
+}
+.boton:hover {
+  text-decoration: none;
+  transform: translateY(-2px);   /* se levanta 2 píxeles */
+}
+
+.boton--primario {
+  background-color: var(--acento-fuerte);
+  color: #ffffff;
+}
+.boton--primario:hover { background-color: var(--acento); }
+
+.boton--secundario {
+  border: 1px solid var(--borde);
+  color: var(--texto);
+}
+.boton--secundario:hover { border-color: var(--acento); }
+
+/* ---------- 6. SECCIONES ---------- */
+.seccion {
+  max-width: var(--ancho-max);
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.seccion__titulo {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin-bottom: 0.75rem;
+}
+
+/* ::after crea un elemento decorativo DESPUÉS del título:
+   aquí, la rayita azul debajo. content:"" es obligatorio para que exista. */
+.seccion__titulo::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  margin-top: 0.6rem;
+  border-radius: 3px;
+  background-color: var(--acento);
+}
+
+.seccion__intro {
+  color: var(--texto-suave);
+  max-width: 640px;
+  margin-bottom: 2.5rem;
+}
+
+.seccion--contacto { text-align: center; }
+.seccion--contacto .seccion__titulo::after { margin-inline: auto; }
+.seccion--contacto .seccion__intro { margin-inline: auto; }
+
+/* ---------- 7. REJILLA DE TARJETAS ----------
+   grid = rejilla. repeat(auto-fit, minmax(300px, 1fr)) significa:
+   "mete tantas columnas como quepan, cada una de 300px mínimo".
+   Con esto la página YA es responsive: en el móvil quedan en una columna. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ---------- 8. TARJETA DE PROYECTO ---------- */
+.proyecto {
+  background-color: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1.75rem;
+  transition: transform 0.2s, border-color 0.2s;
+
+  /* flex en columna + margin-top:auto en los enlaces = todos los botones
+     de las tarjetas quedan alineados abajo aunque el texto sea distinto. */
+  display: flex;
+  flex-direction: column;
+}
+.proyecto:hover {
+  transform: translateY(-4px);
+  border-color: var(--acento);
+}
+
+.proyecto--destacado {
+  margin-bottom: 1.5rem;
+  border-color: var(--acento-fuerte);
+  /* linear-gradient = degradado suave de un color a otro. */
+  background-image: linear-gradient(160deg, #161b22 0%, #12233d 100%);
+}
+
+.proyecto__etiqueta {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;   /* lo pasa TODO A MAYÚSCULAS */
+  letter-spacing: 1px;
+  color: var(--acento);
+  border: 1px solid var(--acento);
+  border-radius: 999px;        /* número enorme = forma de pastilla */
+  padding: 0.2rem 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.proyecto__titulo {
+  font-size: 1.3rem;
+  margin-bottom: 0.6rem;
+}
+
+.proyecto__desc {
+  color: var(--texto-suave);
+  margin-bottom: 1rem;
+}
+
+.proyecto__puntos {
+  color: var(--texto-suave);
+  margin: 0 0 1.25rem 1.1rem;   /* el último valor sangra la lista */
+}
+.proyecto__puntos li { margin-bottom: 0.4rem; }
+
+/* code = el texto tipo código, con fondo y fuente de máquina de escribir. */
+code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.9em;
+  background-color: rgba(88, 166, 255, 0.12);
+  color: var(--acento);
+  padding: 0.1rem 0.35rem;
+  border-radius: 5px;
+}
+
+/* Las etiquetas de tecnologías (Java 17, Spring Boot...). */
+.proyecto__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin-bottom: 1.25rem;
+}
+.proyecto__tags li {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+}
+
+.proyecto__enlaces {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: auto;   /* empuja los enlaces hasta abajo de la tarjeta */
+}
+
+.enlace { font-weight: 600; font-size: 0.95rem; }
+
+/* ---------- 9. SOBRE MÍ Y HABILIDADES ---------- */
+.sobre {
+  max-width: 720px;
+  color: var(--texto-suave);
+}
+.sobre p { margin-bottom: 1rem; }
+
+.habilidad {
+  background-color: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+}
+.habilidad h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.9rem;
+  color: var(--acento);
+}
+.habilidad ul {
+  list-style: none;
+  color: var(--texto-suave);
+  font-size: 0.95rem;
+}
+.habilidad li {
+  padding-left: 1.1rem;
+  position: relative;    /* necesario para colocar el ▸ con position:absolute */
+  margin-bottom: 0.4rem;
+}
+.habilidad li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--acento);
+}
+
+/* ---------- 10. PIE DE PÁGINA ---------- */
+.pie {
+  border-top: 1px solid var(--borde);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+/* ---------- 11. PANTALLAS PEQUEÑAS ----------
+   @media = "aplica estas reglas SOLO si se cumple la condición".
+   Aquí: si la pantalla mide 600px de ancho o menos (un móvil). */
+@media (max-width: 600px) {
+  .nav { justify-content: center; }
+  .nav__links { gap: 1rem; font-size: 0.9rem; }
+  .hero { padding-top: 3.5rem; }
+  .seccion { padding: 3rem 1.25rem; }
+  .boton { width: 100%; text-align: center; }
+}
