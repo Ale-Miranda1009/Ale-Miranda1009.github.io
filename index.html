@@ -1,187 +1,216 @@
 <!DOCTYPE html>
-<!-- ============================================================
-     PORTAFOLIO — página principal
-     <!DOCTYPE html> = le avisa al navegador "esto es HTML moderno".
-     lang="es"       = el contenido está en español.
-     ============================================================ -->
 <html lang="es">
 <head>
-  <!-- charset = qué alfabeto usamos. utf-8 permite tildes y ñ. -->
-  <meta charset="utf-8">
-  <!-- viewport = hace que la página se adapte al ancho del móvil. -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- description = el textito que sale en Google debajo del título. -->
-  <meta name="description" content="Portafolio de desarrollo backend con Java y Spring Boot.">
-
-  <!-- title = el nombre que sale en la pestaña del navegador. -->
-  <title>Portafolio · Karen Miranda</title>
-
-  <!-- link rel="stylesheet" = "trae los estilos que están en styles.css". -->
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Karen Miranda · Desarrolladora Backend</title>
+<meta name="description" content="Portafolio de Karen Miranda, desarrolladora backend junior. Java 17, Spring Boot, PostgreSQL y AWS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+>
 
-  <!-- ========== BARRA DE NAVEGACIÓN ==========
-       <nav> = zona de enlaces de navegación.
-       Cada href="#algo" salta a la sección con ese id más abajo. -->
-  <nav class="nav">
-    <a class="nav__logo" href="#inicio">&lt;/&gt; Karen Miranda</a>
-    <ul class="nav__links">
-      <li><a href="#proyectos">Proyectos</a></li>
-      <li><a href="#sobre-mi">Sobre mí</a></li>
-      <li><a href="#habilidades">Habilidades</a></li>
-      <li><a href="curriculum.pdf" download>Currículum</a></li>
-    </ul>
-  </nav>
+<style>
+  body { margin:0; background:#14262A; font-family:Inter, Helvetica, sans-serif; color:#14262A; -webkit-font-smoothing:antialiased; }
+  a { color:#CE0A0A; text-decoration:none; }
+  a:hover { color:#7D0000; }
+  * { box-sizing:border-box; }
 
-  <!-- ========== PORTADA (hero) ==========
-       "hero" es como se le llama al bloque grande de bienvenida. -->
-  <header class="hero" id="inicio">
-    <p class="hero__saludo">Hola, soy</p>
-    <h1 class="hero__nombre">Karen Miranda</h1>
-    <p class="hero__rol">Desarrolladora Backend Junior · Java &amp; Spring Boot</p>
-    <p class="hero__texto">
-      Estudiante de Ingeniería de Sistemas construyendo APIs REST con Java 17,
-      Spring Boot y PostgreSQL. Me interesa entender <em>por qué</em> funciona
-      cada cosa, no solo que funcione.
-    </p>
-    <div class="hero__botones">
-      <a class="boton boton--primario" href="#proyectos">Ver proyectos</a>
-      <a class="boton boton--secundario" href="https://github.com/Ale-Miranda1009" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </header>
+  @media (max-width: 700px) {
+    .pf-card { grid-template-columns: 44px 1fr !important; }
+    .pf-card img { max-width: 100%; height: auto; }
+  }
 
-  <main>
+</style>
 
-    <!-- ========== PROYECTOS ========== -->
-    <section class="seccion" id="proyectos">
-      <h2 class="seccion__titulo">Proyectos</h2>
-      <p class="seccion__intro">
-        Cada proyecto incluye el código en GitHub y una explicación de qué
-        decisiones técnicas tomé.
-      </p>
+<section style="display:block">
 
-      <!-- ---- PROYECTO DESTACADO ----
-           Este ocupa el ancho completo porque es el más fuerte. -->
-      <article class="proyecto proyecto--destacado">
-        <div class="proyecto__etiqueta">Proyecto destacado</div>
-        <h3 class="proyecto__titulo">BankConnect · accounts-service</h3>
-        <p class="proyecto__desc">
-          Microservicio bancario con clientes, cuentas y movimientos de dinero:
-          ingresos, retiros y transferencias. 12 endpoints REST sobre PostgreSQL,
-          con su propia interfaz web y 32 tests. Lo hice para entender cómo se
-          construye un backend de verdad, no solo un CRUD.
-        </p>
-        <ul class="proyecto__puntos">
-          <li><strong>El dinero se maneja con <code>BigDecimal</code></strong>, nunca con <code>double</code>. En Java <code>0.1 + 0.2</code> da <code>0.30000000000000004</code>, y en un saldo bancario eso no vale.</li>
-          <li><strong>Las transferencias son atómicas.</strong> Restar, sumar y registrar el movimiento pasan dentro de una transacción: o se hacen las tres cosas o no se hace ninguna.</li>
-          <li><strong>Las cuentas se bloquean antes de tocar el saldo</strong>, y siempre en el mismo orden. Si no, dos transferencias cruzadas se quedan esperándose la una a la otra para siempre.</li>
-          <li><strong>Ninguna cuenta se borra.</strong> Cambian de estado y sus movimientos se conservan, porque un banco no puede perder el histórico.</li>
-          <li><strong>Los errores se traducen en un solo sitio</strong> al código HTTP que les toca, y ningún controlador tiene <code>try/catch</code>.</li>
-          <li>Arquitectura en <strong>capas</strong>: Controller → Service → Repository → Base de datos, y las entidades nunca salen al exterior.</li>
-        </ul>
-        <ul class="proyecto__tags">
-          <li>Java 17</li><li>Spring Boot</li><li>Spring Data JPA</li>
-          <li>PostgreSQL</li><li>Flyway</li><li>Maven</li>
-          <li>JUnit 5</li><li>Mockito</li><li>Swagger</li>
-        </ul>
-        <div class="proyecto__enlaces">
-          <a href="https://github.com/Ale-Miranda1009/accounts-service" class="boton boton--primario" target="_blank" rel="noopener">Ver en GitHub →</a>
-        </div>
-      </article>
+  <div id="portafolio">
 
-      <!-- ---- REJILLA DE PROYECTOS ----
-           <div class="grid"> coloca las tarjetas en columnas automáticas. -->
-      <div class="grid">
+    <div class="pf-card" style="width:100%;max-width:1080px;margin:0 auto;background:#14262A;overflow:hidden;display:grid;grid-template-columns:88px 1fr">
+      <!-- raíl lateral -->
+      <div style="background:#2C5760;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:28px 0;gap:24px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.08em;color:#EDF2FB;writing-mode:vertical-rl;text-orientation:mixed;white-space:nowrap">KAME</div>
+        <div style="width:1px;flex:1;background:#6BA3AB"></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.22em;color:#9FBDC4;writing-mode:vertical-rl;text-orientation:mixed;white-space:nowrap">BACKEND JUNIOR · BOGOTÁ</div>
+        <div style="width:10px;height:10px;background:#CE0A0A;border-radius:50%"></div>
+      </div>
 
-        <article class="proyecto">
-          <h3 class="proyecto__titulo">Chatbot de atención comercial</h3>
-          <p class="proyecto__desc">
-            Chatbot web para una empresa de servicios: responde preguntas usando una
-            base de conocimiento propia y registra los datos de contacto de los
-            interesados (leads) en base de datos.
-          </p>
-          <ul class="proyecto__tags">
-            <li>Python</li><li>FastAPI</li><li>SQLite</li>
-            <li>API de IA</li><li>HTML/CSS/JS</li>
-          </ul>
-          <div class="proyecto__enlaces">
-            <a href="https://github.com/Ale-Miranda1009/seyspro-chatbot" class="boton boton--primario" target="_blank" rel="noopener">Ver en GitHub →</a>
+      <div>
+        <!-- hero con retrato -->
+        <div style="display:grid;grid-template-columns:1fr 460px;min-height:640px">
+          <div style="padding:72px 56px;display:flex;flex-direction:column;justify-content:center;color:#EDF2FB">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.24em;color:#6BA3AB;margin-bottom:26px">DISPONIBLE PARA PRIMER ROL JUNIOR</div>
+            <h1 style="margin:0;font-size:50px;line-height:1.02;letter-spacing:-0.035em;font-weight:300;white-space:nowrap">Karen Alexandra<br><span style="font-weight:700">Miranda Espinosa</span></h1>
+            <p style="margin:30px 0 0;max-width:44ch;font-size:17px;line-height:1.65;color:#D3E0EA">Desarrolladora backend en formación: Java 17 y Spring Boot sobre PostgreSQL, APIs REST con arquitectura por capas. Certificada en AWS Cloud Foundations. Siete semestres de Ingeniería de Sistemas y dos años liderando operaciones reales.</p>
+            <div style="display:flex;gap:12px;margin-top:38px">
+              <a href="curriculum.pdf" download style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;letter-spacing:0.06em;background:#CE0A0A;color:#EDF2FB;padding:15px 24px;transition:background .18s ease, transform .18s ease" class="hv-0">CURRÍCULUM</a>
+              <a href="https://github.com/Ale-Miranda1009" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;letter-spacing:0.06em;background:#CE0A0A;color:#EDF2FB;padding:15px 24px;transition:background .18s ease, transform .18s ease" class="hv-0">VER GITHUB</a>
+              <a href="curriculum.pdf" download style="font-family:'JetBrains Mono',monospace;font-size:13.5px;font-weight:600;letter-spacing:0.06em;border:1px solid #6BA3AB;color:#EDF2FB;padding:15px 24px;transition:background .18s ease, transform .18s ease" class="hv-1">CURRÍCULUM</a>
+            </div>
           </div>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- ========== SOBRE MÍ ========== -->
-    <section class="seccion" id="sobre-mi">
-      <h2 class="seccion__titulo">Sobre mí</h2>
-      <div class="sobre">
-        <p>
-          Soy estudiante de Ingeniería de Sistemas (7° semestre) y me estoy formando
-          como desarrolladora backend con Java. Aprendo construyendo: cada concepto que
-          estudio lo aplico en un proyecto real antes de darlo por sabido.
-        </p>
-        <p>
-          Uso herramientas de IA como apoyo para aprender más rápido, siempre
-          entendiendo y verificando lo que producen. Leo documentación técnica en
-          inglés sin dificultad y busco mi primera experiencia profesional en un
-          equipo donde pueda crecer.
-        </p>
-      </div>
-    </section>
-
-    <!-- ========== HABILIDADES ========== -->
-    <section class="seccion" id="habilidades">
-      <h2 class="seccion__titulo">Habilidades</h2>
-      <div class="grid">
-        <div class="habilidad">
-          <h3>Backend</h3>
-          <ul>
-            <li>Java 17 · Programación Orientada a Objetos</li>
-            <li>Spring Boot · Spring Data JPA</li>
-            <li>APIs REST · JSON</li>
-            <li>Arquitectura en capas</li>
-          </ul>
+          <div style="position:relative;background:#2C5760;overflow:hidden">
+            <img src="foto.png" alt="Retrato de Karen Alexandra Miranda Espinosa" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:saturate(0.9) contrast(1.03)">
+            <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(20,38,42,0.55), rgba(20,38,42,0))"></div>
+            <div style="position:absolute;left:-1px;bottom:40px;background:#CE0A0A;color:#EDF2FB;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.14em;padding:10px 16px">JAVA · SPRING BOOT · AWS</div>
+          </div>
         </div>
-        <div class="habilidad">
-          <h3>Datos</h3>
-          <ul>
-            <li>SQL · bases de datos relacionales</li>
-            <li>PostgreSQL</li>
-            <li>Modelado de tablas y relaciones</li>
-            <li>Migraciones con Flyway</li>
-          </ul>
+
+        <!-- perfil en banda clara -->
+        <div style="background:#EDF2FB;padding:56px;display:grid;grid-template-columns:220px 1fr;gap:44px;align-items:start">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.2em;color:#6BA3AB;border-top:2px solid #CE0A0A;padding-top:14px">PERFIL</div>
+          <div>
+            <p style="margin:0 0 16px;font-size:21px;line-height:1.5;letter-spacing:-0.012em;color:#2C5760">Estudiante de Ingeniería de Sistemas (7° semestre) en formación como desarrolladora backend, certificada en AWS Cloud Foundations.</p>
+            <p style="margin:0;font-size:16px;line-height:1.75;color:#3B4E53;max-width:70ch">Combino el aprendizaje técnico con experiencia liderando operaciones, ventas y clientes, lo que me da una visión cercana del negocio. Uso herramientas de IA como apoyo, entendiendo y validando lo que producen. Leo documentación técnica en inglés sin problema y busco mi primera oportunidad como desarrolladora Junior.</p>
+          </div>
         </div>
-        <div class="habilidad">
-          <h3>Herramientas</h3>
-          <ul>
-            <li>Git y GitHub</li>
-            <li>Maven</li>
-            <li>IntelliJ IDEA</li>
-            <li>Python · FastAPI</li>
-          </ul>
+
+        <!-- habilidades como filas mono -->
+        <div style="padding:56px;color:#EDF2FB">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.2em;color:#6BA3AB;margin-bottom:30px">HABILIDADES TÉCNICAS</div>
+          <div style="display:flex;flex-direction:column">
+            <div style="display:grid;grid-template-columns:220px 1fr;gap:32px;padding:20px 0;border-top:1px solid #2C5760;align-items:baseline">
+              <div style="font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6BA3AB">Backend</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:15px;line-height:1.9;color:#EDF2FB">Java 17 · Spring Boot · Spring Data JPA · Python · FastAPI · APIs REST · POO</div>
+            </div>
+            <div style="display:grid;grid-template-columns:220px 1fr;gap:32px;padding:20px 0;border-top:1px solid #2C5760;align-items:baseline">
+              <div style="font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6BA3AB">Datos</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:15px;line-height:1.9;color:#EDF2FB">PostgreSQL · SQL · JPA / ORM · Flyway</div>
+            </div>
+            <div style="display:grid;grid-template-columns:220px 1fr;gap:32px;padding:20px 0;border-top:1px solid #2C5760;border-bottom:1px solid #2C5760;align-items:baseline">
+              <div style="font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#6BA3AB">Herramientas y nube</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:15px;line-height:1.9;color:#EDF2FB">Git · GitHub · AWS Cloud Foundations · Google Gemini (integración de IA)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- proyectos: filas anchas, máximo peso -->
+        <div style="background:#EDF2FB;padding:56px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:34px">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.2em;color:#6BA3AB;margin-bottom:10px">PROYECTOS</div>
+              <h2 style="margin:0;font-size:40px;letter-spacing:-0.035em;font-weight:700;color:#14262A">Entra al código</h2>
+            </div>
+            <a href="https://github.com/Ale-Miranda1009" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#CE0A0A;border-bottom:1px solid #CE0A0A;padding-bottom:2px;transition:color .18s ease, border-color .18s ease" class="hv-2">github.com/Ale-Miranda1009 →</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div style="background:#FFFFFF;border:1px solid #C7D3E4;padding:34px 36px;display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:center;transition:transform .2s ease, border-color .2s ease" class="hv-3">
+              <div>
+                <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:10px">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:600;color:#2C5760">accounts-service</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;background:#7D0000;color:#EDF2FB;padding:5px 9px">MICROSERVICIO</span>
+                </div>
+                <div style="font-size:16px;font-weight:600;color:#14262A;margin-bottom:10px">Gestión de cuentas y clientes</div>
+                <p style="margin:0;font-size:15px;line-height:1.7;color:#3B4E53;max-width:66ch">API REST con arquitectura por capas (controller / service / repository / entity), credenciales por variables de entorno y migraciones de base de datos con Flyway.</p>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.8;color:#2C5760">Java 17 · Spring Boot<br>Spring Data JPA<br>PostgreSQL · Flyway</div>
+                <a href="https://github.com/Ale-Miranda1009/accounts-service" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.06em;background:#CE0A0A;color:#EDF2FB;padding:14px 20px;text-align:center;transition:background .18s ease" class="hv-4">VER EN GITHUB →</a>
+              </div>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #C7D3E4;padding:34px 36px;display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:center;transition:transform .2s ease, border-color .2s ease" class="hv-5">
+              <div>
+                <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:10px">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:600;color:#2C5760">seyspro-chatbot</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;background:#7D0000;color:#EDF2FB;padding:5px 9px">IA + API</span>
+                </div>
+                <div style="font-size:16px;font-weight:600;color:#14262A;margin-bottom:10px">Chatbot Seyspro · atención comercial</div>
+                <p style="margin:0;font-size:15px;line-height:1.7;color:#3B4E53;max-width:66ch">API REST que responde a clientes con IA y registra leads. Lógica, base de conocimiento e integración desarrolladas y validadas por mí.</p>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:16px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.8;color:#2C5760">Python · FastAPI<br>SQLAlchemy<br>Google Gemini</div>
+                <a href="https://github.com/Ale-Miranda1009/seyspro-chatbot" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.06em;background:#CE0A0A;color:#EDF2FB;padding:14px 20px;text-align:center;transition:background .18s ease" class="hv-6">VER EN GITHUB →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- experiencia -->
+        <div style="padding:56px;color:#EDF2FB">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.2em;color:#6BA3AB;margin-bottom:32px">EXPERIENCIA</div>
+          <div style="border-left:2px solid #6BA3AB;padding-left:30px;display:flex;flex-direction:column;gap:38px">
+            <div style="position:relative">
+              <div style="position:absolute;left:-37px;top:7px;width:12px;height:12px;background:#CE0A0A;border-radius:50%"></div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:0.1em;color:#6BA3AB;margin-bottom:8px">FEB 2024 — ACTUALIDAD</div>
+              <div style="font-size:22px;font-weight:600;letter-spacing:-0.015em">Jefe de Operaciones</div>
+              <div style="font-size:15px;color:#9FBDC4;margin:4px 0 12px">Señales y Proyectos SAS</div>
+              <p style="margin:0;font-size:15px;line-height:1.75;color:#D3E0EA;max-width:74ch">Gestión integral de proyectos desde el requerimiento del cliente hasta producción, despacho y entrega. Coordinación de equipos comercial, diseño, producción, compras y logística. Cotizaciones, negociación, licitaciones y contratación; seguimiento de proveedores y posventa.</p>
+            </div>
+            <div style="position:relative">
+              <div style="position:absolute;left:-37px;top:7px;width:12px;height:12px;background:#6BA3AB;border-radius:50%"></div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:0.1em;color:#6BA3AB;margin-bottom:8px">FEB 2023 — FEB 2024</div>
+              <div style="font-size:22px;font-weight:600;letter-spacing:-0.015em">Ejecutiva Comercial</div>
+              <div style="font-size:15px;color:#9FBDC4;margin:4px 0 12px">Starmicros</div>
+              <p style="margin:0;font-size:15px;line-height:1.75;color:#D3E0EA;max-width:74ch">Asesoría y seguimiento a clientes, identificación de oportunidades. Cotizaciones y propuestas de soluciones de seguridad y tecnología; negociación y cierre. Coordinación con áreas técnicas y logísticas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- formación + idiomas -->
+        <div style="background:#EDF2FB;padding:56px;display:grid;grid-template-columns:1fr 1fr;gap:48px">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.2em;color:#6BA3AB;margin-bottom:22px">FORMACIÓN Y CERTIFICACIÓN</div>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <div style="background:#FFFFFF;border:1px solid #C7D3E4;padding:24px">
+                <div style="font-size:18px;font-weight:600;color:#2C5760">Ingeniería de Sistemas</div>
+                <div style="font-size:14.5px;color:#3B4E53;margin:6px 0 10px">Universidad EAN, Bogotá · cursando 7° semestre</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#2C5760">Arquitectura · Bases de Datos · Programación</div>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #C7D3E4;border-left:3px solid #CE0A0A;padding:24px">
+                <div style="font-size:18px;font-weight:600;color:#2C5760">AWS Academy Graduate</div>
+                <div style="font-size:14.5px;color:#3B4E53;margin:6px 0 10px">Cloud Foundations · Amazon Web Services</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#7D0000">CERTIFICACIÓN</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.2em;color:#6BA3AB;margin-bottom:22px">IDIOMAS</div>
+            <div style="display:flex;flex-direction:column">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid #C7D3E4">
+                <span style="font-size:17px;color:#14262A">Español</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2C5760">NATIVO</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid #C7D3E4">
+                <span style="font-size:17px;color:#14262A">Inglés</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2C5760">TÉCNICO · LECTURA</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px solid #C7D3E4">
+                <span style="font-size:17px;color:#14262A">Alemán</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#2C5760">A2 · GOETHE-INSTITUT</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <div style="background:#2C5760;color:#EDF2FB;padding:56px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:40px">
+            <div style="display:flex;align-items:center;gap:22px">
+              <img src="foto-perfil.png" alt="Karen Alexandra Miranda Espinosa" style="width:76px;height:76px;border-radius:50%;object-fit:cover;object-position:center;border:2px solid #6BA3AB;flex:none">
+              <div>
+                <div style="font-size:20px;font-weight:600;letter-spacing:-0.015em;margin-bottom:8px">Karen Alexandra Miranda Espinosa</div>
+                <div style="display:flex;flex-wrap:wrap;gap:16px">
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:13.5px;color:#8FB0B6;white-space:nowrap">Desarrolladora backend · Bogotá</span>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px">
+              <a href="https://github.com/Ale-Miranda1009" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.06em;border:1px solid #6BA3AB;color:#EDF2FB;padding:13px 20px;transition:background .18s ease, border-color .18s ease" class="hv-9">GITHUB</a>
+              <a href="https://linkedin.com/in/karen-miranda-7b321a206" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.06em;border:1px solid #6BA3AB;color:#EDF2FB;padding:13px 20px;transition:background .18s ease, border-color .18s ease" class="hv-10">LINKEDIN</a>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- ========== CONTACTO ========== -->
-    <section class="seccion seccion--contacto" id="contacto">
-      <h2 class="seccion__titulo">Contacto</h2>
-      <p class="seccion__intro">
-        Estoy buscando mi primera oportunidad como desarrolladora backend.
-      </p>
-      <div class="hero__botones">
-        <a class="boton boton--secundario" href="https://github.com/Ale-Miranda1009" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </section>
 
-  </main>
 
-  <footer class="pie">
-    <p>Hecho a mano con HTML y CSS.</p>
-  </footer>
+
 
 </body>
 </html>
